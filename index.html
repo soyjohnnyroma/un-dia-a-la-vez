@@ -46,7 +46,7 @@ const recipes=[
 ];
 const wellbeing=['Abrir la ventana y notar el aire durante un minuto.','Regar una planta o mirar con calma algo que esté creciendo.','Sentarte un momento junto a tus mascotas y darles cariño.','Escuchar una canción que te guste.','Tomar una pausa tranquila con una bebida que disfrutes.','Estirar suavemente brazos y hombros solo si se siente cómodo.','Compartir una conversación o un momento con alguien cercano.','Descansar sin convertirlo en una tarea.','Mirar el paisaje y encontrar tres detalles que no habías notado.','Hacer algo pequeño que te deje el espacio más agradable.'];
 const dogTasks=['Revisar que tengan agua limpia y disponible.','Darles su comida habitual, según sus necesidades y rutina.','Observar si alguno parece incómodo o distinto a lo habitual.','Compartir un momento de juego, paseo o compañía si es adecuado.','Revisar que su espacio esté limpio y seguro.'];
-const get=(k,d)=>{try{return JSON.parse(localStorage.getItem('maria-app-'+k))??d}catch(e){return d}};const set=(k,v)=>localStorage.setItem('maria-app-'+k,JSON.stringify(v));
+const get=(k,d)=>{try{const raw=localStorage.getItem('maria-app-'+k);return raw?JSON.parse(raw):d}catch(e){return d}};const set=(k,v)=>localStorage.setItem('maria-app-'+k,JSON.stringify(v));
 let prefs=get('prefs',{likes:'',avoid:'',dogs:[],start:new Date().toISOString().slice(0,10)});let mealOffset=0;
 const isoToday=()=>new Date().toLocaleDateString('en-CA');
 function dayNumber(){let s=new Date((prefs.start||isoToday())+'T00:00:00'),n=new Date(isoToday()+'T00:00:00');return Math.max(1,Math.floor((n-s)/86400000)+1)}
